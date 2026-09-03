@@ -1,0 +1,906 @@
+CREATE TABLE Ospedale (
+    codice INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    citta VARCHAR(100) NOT NULL,
+    indirizzo VARCHAR(255) NOT NULL
+);
+
+INSERT INTO Ospedale (codice, nome, citta, indirizzo)
+VALUES
+(1, 'Ospedale San Giovanni', 'Roma', 'Via di San Giovanni in Laterano, 50'),
+(2, 'Ospedale Niguarda', 'Milano', 'Piazza Ospedale Maggiore, 3');
+
+CREATE TABLE Reparto (
+    nome VARCHAR(100),
+    codiceospedale INT,
+    telefono VARCHAR(15),
+    orariovisita VARCHAR(50),
+    PRIMARY KEY (nome, codiceospedale),
+    FOREIGN KEY (codiceospedale) REFERENCES Ospedale(codice)
+);
+
+INSERT INTO Reparto (nome, codiceospedale, telefono, orariovisita)
+VALUES
+('cardiologia', 1, '06-1234567', '09:00-12:00, 14:00-17:00'),
+('ortopedia', 1, '06-2345678', '10:00-13:00, 15:00-18:00'),
+('pediatria', 1, '06-3456789', '08:00-11:00, 13:00-16:00'),
+('neurologia', 2, '02-1234567', '09:00-12:00, 14:00-17:00'),
+('dermatologia', 2, '02-2345678', '10:00-13:00, 15:00-18:00'),
+('pediatria', 2, '02-3456789', '08:00-11:00, 13:00-16:00');
+
+CREATE TABLE Stanza (
+    id INT PRIMARY KEY,
+    numero INT NOT NULL,
+    piano INT NOT NULL,
+    nomereparto VARCHAR(100),
+    codiceospedale INT,
+    FOREIGN KEY (nomereparto, codiceospedale) REFERENCES Reparto(nome, codiceospedale)
+);
+
+INSERT INTO Stanza (id, numero, piano, nomereparto, codiceospedale)
+VALUES
+(1, 101, 1, 'cardiologia', 1),
+(2, 202, 2, 'ortopedia', 1),
+(3, 103, 1, 'pediatria', 1),
+(4, 204, 2, 'ortopedia', 1),
+(5, 101, 1, 'dermatologia', 2),
+(6, 202, 2, 'neurologia', 2),
+(7, 203, 2, 'dermatologia', 2),
+(8, 104, 1, 'pediatria', 2);
+
+CREATE TABLE SalaOperatoria (
+    nome VARCHAR(100) PRIMARY KEY,
+    idstanza INT,
+    FOREIGN KEY (idstanza) REFERENCES Stanza(id)
+);
+
+INSERT INTO SalaOperatoria (nome, idstanza)
+VALUES
+('SalaOperatoria Cardiologia', 1),  
+('SalaOperatoria Ortopedia', 2),    
+('SalaOperatoria Dermatologia', 5);
+
+CREATE TABLE Letto (
+    numero INT,
+    idstanza INT,
+    occupato BOOLEAN,
+    PRIMARY KEY (numero, idstanza),
+    FOREIGN KEY (idstanza) REFERENCES Stanza(id)
+);
+
+INSERT INTO Letto (numero, idstanza, occupato)
+VALUES
+(1, 1, FALSE), 
+(2, 1, TRUE), 
+(3, 2, FALSE), 
+(4, 3, FALSE), 
+(5, 4, TRUE),
+(6, 4, FALSE),
+(1, 5, FALSE), 
+(2, 6, TRUE), 
+(3, 6, FALSE), 
+(4, 7, FALSE),
+(5, 7, FALSE),
+(6, 8, TRUE); 
+
+CREATE TABLE Paziente (
+    codice_fiscale VARCHAR(16) PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    cognome VARCHAR(50) NOT NULL,
+    datanascita DATE NOT NULL
+);
+
+INSERT INTO Paziente (codice_fiscale, nome, cognome, datanascita)
+VALUES
+('rssmra85m07f205w', 'Mario', 'Rossi', '1985-07-07'),
+('vrngpp81l13f548z', 'Giuseppe', 'Verdi', '1981-08-13'),
+('bnclra79p26f944x', 'Laura', 'Bianchi', '1979-09-26'),
+('frrgpp87s14h501c', 'Paola', 'Ferrari', '1987-10-14'),
+('vrtgpp90l22h442v', 'Luca', 'Verdi', '1990-11-22'),
+('rsslra82a08f459r', 'Alessandra', 'Rossi', '1982-12-08'),
+('bncmra75a21f726p', 'Maria', 'Bianchi', '1975-01-21'),
+('frlgpp89c25h305y', 'Giovanni', 'Ferrari', '1989-02-25'),
+('vrtgpp92l29h709t', 'Gabriele', 'Verdi', '1992-03-29'),
+('rssmra80m03f815q', 'Martina', 'Rossi', '1980-04-03'),
+('bnclra77p09f642u', 'Elena', 'Bianchi', '1977-05-09'),
+('frlgpp88s17h216i', 'Simone', 'Ferrari', '1988-06-17'),
+('vrngpp91l12f833o', 'Antonio', 'Verdi', '1991-07-12'),
+('rsslra83a10f578e', 'Giulia', 'Rossi', '1983-08-10'),
+('vrtgpp94l28h984l', 'Chiara', 'Verdi', '1994-09-28'),
+('bnclra78p14f361k', 'Roberto', 'Bianchi', '1978-10-14'),
+('frrgpp86s16h807m', 'Eleonora', 'Ferrari', '1986-11-16'),
+('vrngpp93l27f235n', 'Fabio', 'Verdi', '1993-12-27'),
+('rsslra84a11f174g', 'Valentina', 'Rossi', '1984-01-11'),
+('bnclra76p08f592b', 'Lorenzo', 'Bianchi', '1976-02-08');
+
+CREATE TABLE Ricovero (
+    codicefiscale VARCHAR(16),
+    datainizio DATE,
+    datafine DATE,
+    PRIMARY KEY (codicefiscale, datainizio),
+    FOREIGN KEY (codicefiscale) REFERENCES Paziente(codice_fiscale)
+);
+
+-- Inserimento dei ricoveri per i pazienti
+INSERT INTO Ricovero (codicefiscale, datainizio, datafine)
+VALUES
+('rssmra85m07f205w', '2023-01-15', '2023-01-20'),  
+('vrngpp81l13f548z', '2023-02-05', '2023-02-10'),  
+('bnclra79p26f944x', '2023-03-12', '2023-03-18'),  
+('frrgpp87s14h501c', '2023-04-20', '2023-04-25'),  
+('vrtgpp90l22h442v', '2023-05-10', '2023-05-15'); 
+
+CREATE TABLE PrenotazioneEsame (
+    codice INT PRIMARY KEY,
+    medicoprescrittore VARCHAR(100),
+    ora TIME,
+    data DATE,
+    regime VARCHAR(20), --ENUM('privato', 'assistenza sanitaria'),
+    pazientecodicefiscale VARCHAR(16),
+    tipoesame VARCHAR(100),
+    avvertenze TEXT,
+    dataprenotazione DATE,
+    urgenza VARCHAR(7), --ENUM('verde', 'gialla', 'rossa'),
+    FOREIGN KEY (pazientecodicefiscale) REFERENCES Paziente(codice_fiscale)
+);
+
+INSERT INTO PrenotazioneEsame (codice, medicoprescrittore, ora, data, regime, pazientecodicefiscale, tipoesame, avvertenze, dataprenotazione, urgenza)
+VALUES
+(1, 'Dott. Fabbri', '09:00:00', '2024-07-20', 'privato', 'bnclra79p26f944x', 'Risonanza magnetica', 'Paziente con claustrofobia, usare sedativo', '2024-07-10', 'verde'),
+(2, 'Dott.ssa Gatti', '10:30:00', '2024-07-22', 'assistenza sanitaria', 'frrgpp87s14h501c', 'Ecografia addominale', 'Paziente diabetico, evitare digiuno', '2024-07-11', 'gialla'),
+(3, 'Dott. Conti', '11:00:00', '2024-07-23', 'privato', 'frrgpp86s16h807m', 'TAC toracica', 'Nessuna avvertenza', '2024-07-12', 'rossa'),
+(4, 'Dott. Esposito', '14:00:00', '2024-07-24', 'assistenza sanitaria', 'bnclra76p08f592b', 'Mammografia', 'Paziente con allergia al lattice', '2024-07-13', 'verde'),
+(5, 'Dott.ssa Romano', '15:30:00', '2024-07-25', 'privato', 'vrngpp91l12f833o', 'Gastroscopia', 'Paziente con intolleranza al glutine', '2024-07-14', 'gialla');
+ 
+CREATE TABLE Esame (
+    codice INT PRIMARY KEY,
+    descrizione VARCHAR(255),
+    costopr DECIMAL(10, 2),
+    costopu DECIMAL(10, 2),
+    codiceprenotazione INT,
+    FOREIGN KEY (codiceprenotazione) REFERENCES PrenotazioneEsame(codice)
+);
+
+INSERT INTO Esame (codice, descrizione, costopr, costopu, codiceprenotazione)
+VALUES
+(1, 'Risonanza magnetica', 150.00, 100.00, 1),
+(2, 'Ecografia addominale', 80.00, 50.00, 2),
+(3, 'TAC toracica', 200.00, 150.00, 3),
+(4, 'Mammografia', 90.00, 60.00, 4),
+(5, 'Gastroscopia', 120.00, 80.00, 5);
+
+----
+CREATE TABLE Chiamante (
+    cf VARCHAR(16) PRIMARY KEY,
+    ruolo VARCHAR(10)
+);
+
+CREATE TABLE Ambulanza (
+    id INT PRIMARY KEY,
+    tipo VARCHAR(20)
+);
+
+CREATE TABLE Equipe (
+    id INT PRIMARY KEY
+);
+
+CREATE TABLE Trasporto (
+    id INT PRIMARY KEY,
+    oraluogo TIMESTAMP,
+    orapartenza TIMESTAMP,
+    oraarrivo TIMESTAMP,
+    gravità VARCHAR(20),
+	ambulanza INT,
+	equipe INT,
+    FOREIGN KEY (equipe) REFERENCES Equipe(id),
+    FOREIGN KEY (ambulanza) REFERENCES Ambulanza(id)
+);
+
+CREATE TABLE Esito (
+    trasporto INT PRIMARY KEY,
+    stato BOOLEAN,
+    oradecesso TIMESTAMP,
+    FOREIGN KEY (trasporto) REFERENCES Trasporto(id)
+);
+
+
+CREATE TABLE Chiamata (
+    id INT PRIMARY KEY,
+    luogo VARCHAR(50),
+    ora TIMESTAMP,
+    chiamante VARCHAR(16),
+	ambulanza INT,
+    FOREIGN KEY (chiamante) REFERENCES Chiamante(cf),
+    FOREIGN KEY (ambulanza) REFERENCES Ambulanza(id)
+);
+
+CREATE TABLE Personale (
+    cf VARCHAR(16) PRIMARY KEY,
+    ruolo VARCHAR(20),
+    equipe INT,
+    FOREIGN KEY (equipe) REFERENCES Equipe(id)
+);
+
+CREATE TABLE Procedura (
+    numero INT,
+    nome VARCHAR(50),
+    personale VARCHAR(16),
+	trasporto INT,
+    FOREIGN KEY (personale) REFERENCES Personale(cf),
+    FOREIGN KEY (trasporto) REFERENCES Trasporto(id),
+    PRIMARY KEY (numero, personale, trasporto)
+);
+
+insert into Chiamante(cf, ruolo)
+values 
+('RSSMRA85M01H501Z', 'testimone'),
+('BNCLRD90F15H501P', 'coinvolto'),
+('VRDLGU70C08H501B', 'testimone');
+
+insert into Ambulanza(id, tipo)
+values
+(1, 'Croce Rossa'),
+(2, 'Crece Bianca'),
+(3, 'Crece Verde');
+
+INSERT INTO Equipe (id) VALUES
+(1),
+(2),
+(3);
+
+
+INSERT INTO Trasporto (id, oraluogo, orapartenza, oraarrivo, gravità, ambulanza, equipe) VALUES
+(1, '2024-09-01 08:30:00', '2024-09-01 08:45:00', '2024-09-01 09:00:00', 'Rosso', 1, 1),
+(2, '2024-09-02 10:15:00', '2024-09-02 10:30:00', '2024-09-02 10:50:00', 'Giallo', 2, 2),
+(3, '2024-09-03 12:00:00', '2024-09-03 12:10:00', '2024-09-03 12:30:00', 'Verde', 3, 3);
+
+INSERT INTO Esito (trasporto, stato, oradecesso) VALUES
+(1, TRUE, '2024-09-01 08:55:00'),
+(2, FALSE, NULL),
+(3, FALSE, NULL);
+
+INSERT INTO Chiamata (id, luogo, ora, chiamante, ambulanza) VALUES
+(1, 'Piazza Garibaldi', '2024-09-01 08:20:00', 'RSSMRA85M01H501Z', 1),
+(2, 'Via Roma 12', '2024-09-02 10:00:00', 'BNCLRD90F15H501P', 2),
+(3, 'Via Milano 8', '2024-09-03 11:45:00', 'VRDLGU70C08H501B', 3);
+
+INSERT INTO Personale (cf, ruolo, equipe) VALUES
+('GRNLGI75M20H501U', 'Medico', 1),
+('FRNCST85C15H501L', 'Infermiera', 2),
+('LVSTGI92A02H501X', 'Autista', 3);
+
+-- Procedure per il trasporto 1
+INSERT INTO Procedura (numero, nome, personale, trasporto) VALUES
+(1, 'Rianimazione Cardiopolmonare', 'GRNLGI75M20H501U', 1),
+(2, 'Intubazione', 'GRNLGI75M20H501U', 1),
+(3, 'Defibrillazione', 'GRNLGI75M20H501U', 1);
+
+-- Procedure per il trasporto 2
+INSERT INTO Procedura (numero, nome, personale, trasporto) VALUES
+(1, 'Immobilizzazione della colonna vertebrale', 'FRNCST85C15H501L', 2),
+(2, 'Monitoraggio segni vitali', 'FRNCST85C15H501L', 2),
+(3, 'Somministrazione di farmaci endovenosi', 'FRNCST85C15H501L', 2);
+
+-- Procedure per il trasporto 3
+INSERT INTO Procedura (numero, nome, personale, trasporto) VALUES
+(1, 'Somministrazione Ossigeno', 'LVSTGI92A02H501X', 3),
+(2, 'Controllo della pressione sanguigna', 'LVSTGI92A02H501X', 3),
+(3, 'Trasfusione di sangue', 'LVSTGI92A02H501X', 3);
+
+create table Tirocinante(
+	cfimpiegato VARCHAR(16) primary key,
+	datafine DATE,
+	cfmedico VARCHAR(16) not null,
+	foreign key (cfimpiegato) references impiegato(codicefiscale),
+	FOREIGN KEY (cfmedico) REFERENCES medico(cfimpiegato)
+);
+
+create table Attivita(
+	id INT primary key,
+	nome VARCHAR(20) not NULL,
+	descrizione VARCHAR(100) not null
+);
+
+create table Giudizio(
+	cftirocinante VARCHAR(16) primary key,
+	cfmedico VARCHAR(16) not null,
+	esito BOOLEAN not null,
+	FOREIGN KEY (cftirocinante) REFERENCES Tirocinante(cfimpiegato),
+    FOREIGN KEY (cfmedico) REFERENCES Medico(cfimpiegato)
+);
+
+create table Fa(
+	idattivita INT,
+	cftirocinante VARCHAR(16),
+	primary key(idattivita, cftirocinante),
+	FOREIGN KEY (cftirocinante) REFERENCES Tirocinante(cfimpiegato),
+    FOREIGN KEY (idattivita) REFERENCES Attivita(id)
+);
+
+INSERT INTO Impiegato (codicefiscale, nome, cognome, dataassunzione, nomereparto, codiceospedale)
+VALUES 
+('IMP1234567890123', 'Mario', 'Rossi', '2020-01-15', 'cardiologia', 1),
+('IMP9876543210987', 'Luca', 'Bianchi', '2019-05-10', 'neurologia', 2),
+('IMP4567890123456', 'Giulia', 'Verdi', '2021-03-22', 'pediatria', 1),
+('IMP6543210987654', 'Francesca', 'Bruno', '2022-05-01', 'dermatologia', 2),
+('IMP7418529632587', 'Alessandro', 'Neri', '2018-11-01', 'ortopedia', 1);
+
+INSERT INTO Tirocinante (cfimpiegato, datafine, cfmedico)
+VALUES 
+('IMP1234567890123', null, 'fbbrfl96m01a001x'),
+('IMP9876543210987', '2024-06-30', 'pllmra93e01b354n'),
+('IMP4567890123456', null, 'rmnlgi00r01l736u'),
+('IMP6543210987654', '2023-11-01', 'sntgnn94r01l736c'),
+('IMP7418529632587', '2019-05-01', 'espstf98l01c342t'),
+('pllmra93e01b354n', '2015-11-01', 'fbbrfl96m01a001x');
+
+INSERT INTO Attivita (id, nome, descrizione)
+VALUES 
+(1, 'Visita Pazienti', 'Osservazione e assistenza durante le visite mediche ai pazienti'),
+(2, 'Ricerca Clinica', 'Partecipazione a progetti di ricerca medica'),
+(3, 'Analisi Laboratorio', 'Supporto nel lavoro di laboratorio per analisi diagnostiche'),
+(4, 'Gestione Cartelle', 'Organizzazione e gestione delle cartelle cliniche dei pazienti'),
+(5, 'Monitoraggio Terapie', 'Monitoraggio delle terapie somministrate ai pazienti');
+
+INSERT INTO Giudizio (cftirocinante, cfmedico, esito)
+VALUES 
+('IMP6543210987654', 'sntgnn94r01l736c', TRUE),
+('pllmra93e01b354n', 'fbbrfl96m01a001x', TRUE),
+('IMP7418529632587', 'espstf98l01c342t', FALSE);
+
+INSERT INTO Fa (idattivita, cftirocinante)
+VALUES 
+(1, 'IMP1234567890123'),
+(2, 'IMP9876543210987'),
+(3, 'IMP4567890123456'),
+(4, 'IMP6543210987654'),
+(5, 'IMP7418529632587');
+
+--query 1
+select count(*)
+from impiegato i right join tirocinante t on t.cfimpiegato=i.codicefiscale 
+where t.datafine is null
+or (EXTRACT(MONTH FROM AGE(t.datafine, i.dataassunzione)) < 6)
+
+--query 2
+select i.nome, i.cognome
+from medico m left join impiegato i on m.cfimpiegato=i.codicefiscale 
+join tirocinante t on t.cfmedico=m.cfimpiegato
+where t.datafine < CURRENT_DATE
+and t.datafine is not null;
+
+--query php
+select i.nome, i.cognome, i.codicefiscale, i.dataassunzione
+from medico m join tirocinante t on m.cfimpiegato=t.cfimpiegato 
+join impiegato i on m.cfimpiegato=i.codicefiscale 
+where i.nomereparto='cardiologia'
+and i.codiceospedale=1;
+
+create table Operazione(
+codiceO INT primary key,
+codiceT INT not null,
+paziente VARCHAR(16) not null,
+data DATE not null,
+oraInizio TIME,
+oraFINE TIME,
+FOREIGN KEY (paziente) REFERENCES Paziente(codice_fiscale)
+);
+
+create table Apparecchiatura(
+codice INT primary key,
+tipologia VARCHAR(50) not null,
+dataAcquisto DATE not null,
+dataRevisione DATE,
+nome VARCHAR(20) not null,
+descrizione VARCHAR(100) not null
+);
+
+create table Fase(
+operazione INT,
+ordine INT,
+durata TIME not null,
+nota VARCHAR(200) not null,
+apparecchiatura INT not null,
+foreign key (operazione) references Operazione(codiceO),
+foreign key (apparecchiatura) references Apparecchiatura(codice),
+primary key(operazione, ordine)
+);
+
+create table PartecipazioneOperazione(
+operazione INT,
+medico VARCHAR(16),
+ruolo VARCHAR(50) not null,
+foreign key (operazione) references Operazione(codiceO),
+foreign key (medico) references Medico(cfimpiegato),
+primary key(operazione, medico)
+);
+
+create table PartecipazioneFase(
+operazione INT,
+ordine INT,
+medico VARCHAR(16),
+foreign key (operazione, ordine) references Fase(operazione, ordine),
+foreign key (medico) references Medico(cfimpiegato),
+primary key(operazione, ordine, medico)
+);
+
+-- Tabella Operazione
+INSERT INTO Operazione (codiceO, codiceT, paziente, data, oraInizio, oraFine) VALUES
+(1, 101, 'rssmra85m07f205w', '2025-01-15', '10:00:00', '12:30:00'),
+(2, 102, 'vrtgpp90l22h442v', '2025-01-16', '14:00:00', '15:45:00'),
+(3, 103, 'vrtgpp94l28h984l', '2025-01-17', '09:30:00', '11:00:00');
+
+-- Tabella Apparecchiatura
+INSERT INTO Apparecchiatura (codice, tipologia, dataAcquisto, dataRevisione, nome, descrizione) VALUES
+(201, 'Monitor Cardio', '2020-05-10', '2023-05-10', 'Monitor X1', 'Monitor per il controllo dei parametri vitali'),
+(202, 'Defibrillatore', '2018-09-20', '2022-09-20', 'Defib-300', 'Defibrillatore avanzato'),
+(203, 'TAC', '2019-12-15', null, 'TAC-PRO', 'Macchinario per tomografia assiale computerizzata'),
+(204, 'risonatore magnetico', '2019-12-15', '2024-02-22', 'magnet resonator 200', 'Macchinario essenziale per la risonanza magnetica');
+
+-- Tabella Fase
+INSERT INTO Fase (operazione, ordine, durata, nota, apparecchiatura) VALUES
+(1, 1, '01:00:00', 'Preparazione del paziente', 201),
+(1, 2, '01:30:00', 'Intervento chirurgico principale', 202),
+(2, 1, '00:30:00', 'Esame diagnostico pre-operatorio', 203),
+(2, 2, '01:15:00', 'Procedura di intervento', 201),
+(3, 1, '00:45:00', 'Preparazione TAC', 203),
+(3, 2, '00:45:00', 'Analisi con TAC', 203);
+
+-- Tabella PartecipazioneOperazione
+INSERT INTO PartecipazioneOperazione (operazione, medico, ruolo) VALUES
+(1, 'sntgnn94r01l736c', 'Chirurgo'),
+(1, 'lbrcml95a01c342b', 'Anestesista'),
+(2, 'gttlla97r01b354l', 'Radiologo'),
+(2, 'espstf98l01c342t', 'Tecnico di laboratorio'),
+(3, 'pllmra93e01b354n', 'Chirurgo'),
+(3, 'rmnlgi00r01l736u', 'Tecnico di laboratorio');
+
+
+-- Tabella PartecipazioneFase
+INSERT INTO PartecipazioneFase (operazione, ordine, medico) VALUES
+(1, 1, 'sntgnn94r01l736c'),
+(1, 2, 'lbrcml95a01c342b'),
+(2, 1, 'gttlla97r01b354l'),
+(2, 2, 'espstf98l01c342t'),
+(3, 1, 'pllmra93e01b354n'),
+(3, 2, 'rmnlgi00r01l736u');
+
+--query 1
+SELECT p.nome, p.cognome, o.codiceT AS tipologia, COUNT(*) AS numero_operazioni
+FROM Paziente p JOIN Operazione o ON p.codice_fiscale = o.paziente
+GROUP BY p.nome, p.cognome, o.codiceT
+HAVING COUNT(*) > 3;
+
+--query 2
+select codice, nome, descrizione
+from apparecchiatura
+where datarevisione notnull 
+and codice not in(
+	select apparecchiatura
+	from fase 
+);
+
+--query php
+SELECT f.ordine, f.nota, o.data, o.codicet
+                from fase f join operazione o on f.operazione=o.codiceo
+                join partecipazioneoperazione p on o.codiceo=p.operazione 
+                where p.medico='sntgnn94r01l736c'
+                order by f.ordine 
+
+-- Creazione delle nuove tabelle richieste dal progetto
+
+-- Tabella Volontario
+CREATE TABLE Volontario (
+    cf VARCHAR(16) PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    cognome VARCHAR(50) NOT NULL,
+    nascita DATE NOT NULL
+);
+
+-- Tabella Associazione
+CREATE TABLE Associazione (
+    nome VARCHAR(50) PRIMARY KEY
+);
+
+-- Tabella Volontariato (Relazione tra Volontario e Associazione)
+CREATE TABLE Volontariato (
+    volontario VARCHAR(16),
+    associazione VARCHAR(50),
+    FOREIGN KEY (volontario) REFERENCES Volontario(cf),
+    FOREIGN KEY (associazione) REFERENCES Associazione(nome),
+    PRIMARY KEY (volontario, associazione)
+);
+
+-- Tabella Attestato
+CREATE TABLE Attestato (
+    codice INT PRIMARY KEY,
+    volontario VARCHAR(16) NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    dataAcquisizione DATE NOT NULL,
+    FOREIGN KEY (volontario) REFERENCES Volontario(cf)
+);
+
+-- Tabella Presenza (Rappresenta le presenze dei volontari nei reparti)
+CREATE TABLE Presenza (
+    volontario VARCHAR(16),
+    nomeReparto VARCHAR(100),
+    codiceOspedale INT,
+    durata INT NOT NULL,
+    FOREIGN KEY (volontario) REFERENCES Volontario(cf),
+    FOREIGN KEY (nomeReparto, codiceOspedale) REFERENCES Reparto(nome, codiceospedale),
+    PRIMARY KEY (volontario, nomeReparto, codiceOspedale)
+);
+
+-- Tabella Attivita
+CREATE TABLE Attività (
+    codice INT PRIMARY KEY,
+    nomeReparto VARCHAR(100) NOT NULL,
+    codiceOspedale INT NOT NULL,
+    volontario VARCHAR(16) NOT NULL,
+    descrizione VARCHAR(200),
+    FOREIGN KEY (nomeReparto, codiceOspedale) REFERENCES Reparto(nome, codiceospedale),
+    FOREIGN KEY (volontario) REFERENCES Volontario(cf)
+);
+
+-- Tabella Seguire (Relazione tra medico, volontario e attività)
+CREATE TABLE Seguire (
+    volontario VARCHAR(16),
+    medico VARCHAR(16),
+    attivita INT,
+    FOREIGN KEY (volontario) REFERENCES Volontario(cf),
+    FOREIGN KEY (medico) REFERENCES Medico(cfimpiegato),
+    FOREIGN KEY (attivita) REFERENCES Attività(codice),
+    PRIMARY KEY (volontario, medico, attivita)
+);
+
+INSERT INTO Volontario (cf, nome, cognome, nascita) VALUES
+('vlntr001abcd1234', 'Mario', 'Rossi', '1985-03-15'),
+('vlntr002abcd1234', 'Luca', 'Bianchi', '1990-07-20'),
+('vlntr003abcd1234', 'Giulia', 'Verdi', '1995-11-05'),
+('vlntr004abcd1234', 'Anna', 'Neri', '1980-02-25');
+
+-- Dati di esempio per la tabella Associazione
+INSERT INTO Associazione (nome) VALUES
+('Croce Rossa Italiana'),
+('Misericordia'),
+('Caritas');
+
+-- Dati di esempio per la tabella Volontariato
+INSERT INTO Volontariato (volontario, associazione) VALUES
+('vlntr001abcd1234', 'Croce Rossa Italiana'),
+('vlntr002abcd1234', 'Misericordia'),
+('vlntr003abcd1234', 'Caritas'),
+('vlntr004abcd1234', 'Croce Rossa Italiana');
+
+-- Dati di esempio per la tabella Attestato
+INSERT INTO Attestato (volontario, tipo, dataAcquisizione) VALUES
+('vlntr001abcd1234', 'Primo Soccorso', '2010-06-15'),
+('vlntr002abcd1234', 'Aggiornamento Primo Soccorso', '2018-03-22'),
+('vlntr003abcd1234', 'BLSD', '2021-10-01'),
+('vlntr004abcd1234', 'Primo Soccorso', '2005-04-10');
+
+-- Dati di esempio per la tabella Presenza
+INSERT INTO Presenza (volontario, nomeReparto, codiceOspedale, durata) VALUES
+('vlntr001abcd1234', 'pediatria', 1, 5),
+('vlntr001abcd1234', 'cardiologia', 1, 3),
+('vlntr002abcd1234', 'pediatria', 2, 2),
+('vlntr003abcd1234', 'ortopedia', 1, 4),
+('vlntr004abcd1234', 'neurologia', 2, 6);
+
+-- Dati di esempio per la tabella Attivita
+INSERT INTO Attività (codice, nomeReparto, codiceOspedale, volontario, descrizione) VALUES
+(1, 'cardiologia', 1, 'vlntr001abcd1234', 'Supporto amministrativo'),
+(2, 'cardiologia', 1, 'vlntr001abcd1234', 'Assistenza pazienti'),
+(3, 'pediatria', 2, 'vlntr002abcd1234', 'Animazione per bambini'),
+(4, 'ortopedia', 1, 'vlntr003abcd1234', 'Accompagnamento pazienti');
+
+-- Dati di esempio per la tabella Seguire
+INSERT INTO Seguire (volontario, medico, attivita) VALUES
+('vlntr001abcd1234', 'lbrcml95a01c342b', 1),
+('vlntr001abcd1234', 'fbbrfl96m01a001x', 2),
+('vlntr002abcd1234', 'rmnlgi00r01l736u', 3),
+('vlntr003abcd1234', 'lbrcml95a01c342b', 4),
+('vlntr004abcd1234', 'espstf98l01c342t', 2);
+
+-- Query 1: Determinare il numero di presenze di ogni volontario per reparto
+SELECT 
+    p.nomeReparto, 
+    p.codiceOspedale, 
+    COUNT(p.volontario) AS numero_presenze
+FROM Presenza p
+GROUP BY p.nomeReparto, p.codiceOspedale;
+
+-- Query 2: Determinare i medici che hanno seguito almeno 5 volontari
+SELECT 
+    s.medico, 
+    COUNT(DISTINCT s.volontario) AS numero_volontari
+FROM Seguire s
+GROUP BY s.medico
+HAVING COUNT(DISTINCT s.volontario) >= 5;
+
+--query php
+SELECT 
+    v.cf AS codice_fiscale,
+    v.nome AS nome_volontario,
+    v.cognome AS cognome_volontario,
+    v.nascita AS data_nascita,
+    a.nomeReparto AS reparto,
+    a.codiceOspedale AS ospedale,
+    a.descrizione AS descrizione_attivita
+FROM 
+    Volontario v
+JOIN 
+    Attivita a ON v.cf = a.volontario
+WHERE 
+    a.descrizione = 'Supporto amministrativo';
+
+---
+
+CREATE TABLE AmbulatorioInterno (
+    codiceai INT PRIMARY KEY,
+    stanzaid INT,
+    FOREIGN KEY (stanzaid) REFERENCES Stanza(id)
+);
+
+INSERT INTO AmbulatorioInterno (codiceai, stanzaid)
+VALUES
+(1, 1),
+(2, 7);
+
+CREATE TABLE AmbulatorioEsterno (
+    codiceae INT PRIMARY KEY,
+    indirizzo VARCHAR(255),
+    telefono VARCHAR(15),
+    orarioapertura VARCHAR(50)
+);
+
+INSERT INTO AmbulatorioEsterno (codiceae, indirizzo, telefono, orarioapertura)
+VALUES
+(1, 'Via Roma 123, Milano', '02 1234567', '08:00 - 18:00'),
+(2, 'Corso Italia 456, Milano', '06 7654321', '09:00 - 17:30'),
+(3, 'Via Verdi 789, Milano', '011 9876543', '07:30 - 19:00');
+
+CREATE TABLE DisponibilitaInterna (
+    data DATE,
+    ora TIME,
+    codiceai INT,
+    PRIMARY KEY (data, ora, codiceai),
+    FOREIGN KEY (codiceai) REFERENCES AmbulatorioInterno(codiceai)
+);
+
+INSERT INTO DisponibilitaInterna (data, ora, codiceai)
+VALUES
+('2024-07-20', '09:00:00', 1),
+('2024-07-20', '10:30:00', 1),
+('2024-07-22', '15:30:00', 2);
+
+CREATE TABLE DisponibilitaEsterna (
+    data DATE,
+    ora TIME,
+    codiceae INT,
+    PRIMARY KEY (data, ora, codiceae),
+    FOREIGN KEY (codiceae) REFERENCES AmbulatorioEsterno(codiceae)
+);
+
+INSERT INTO DisponibilitaEsterna (data, ora, codiceAE)
+VALUES
+('2024-07-20', '08:00:00', 1),
+('2024-07-21', '10:00:00', 2),
+('2024-07-21', '13:30:00', 3);
+
+CREATE TABLE Impiegato (
+    codicefiscale VARCHAR(16) PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    cognome VARCHAR(50) NOT NULL,
+    dataassunzione DATE NOT NULL,
+    nomereparto VARCHAR(50) NOT NULL,
+    codiceospedale INT NOT NULL,
+    FOREIGN KEY (nomereparto, codiceospedale) REFERENCES Reparto(nome, codiceospedale)
+);
+
+INSERT INTO impiegato (codicefiscale, nome, cognome, dataassunzione, nomereparto, codiceospedale)
+VALUES
+('mncmra85m01h501z', 'Mauro', 'Manconi', '2020-01-15', 'cardiologia', 1),
+('bnclrd87a01f205x', 'Luca', 'Bianchini', '2019-03-22', 'dermatologia', 2),
+('vtlgpp88p01l736j', 'Giuseppe', 'Vitiello', '2021-05-12', 'ortopedia', 1),
+('dnlfba86c01h501q', 'Fabio', 'Danielli', '2018-06-30', 'pediatria', 1),
+('brslcu89m01l736a', 'Lucia', 'Barbieri', '2017-08-25', 'ortopedia', 1),
+('frnlgi90l01h501f', 'Giorgio', 'Farinelli', '2016-07-19', 'neurologia', 2),
+('grglra92r01a001g', 'Laura', 'Gargano', '2022-02-14', 'dermatologia', 2),
+('pllmra93e01b354n', 'Marta', 'Pellegrini', '2015-11-09', 'cardiologia', 1),
+('sntgnn94r01l736c', 'Gianni', 'Santoro', '2023-03-18', 'ortopedia', 1),
+('lbrcml95a01c342b', 'Camilla', 'Lombardi', '2021-10-05', 'pediatria', 1),
+('fbbrfl96m01a001x', 'Flavio', 'Fabbri', '2019-12-20', 'pediatria', 1),
+('gttlla97r01b354l', 'Luca', 'Gatti', '2020-04-15', 'neurologia', 2),
+('espstf98l01c342t', 'Stefania', 'Esposito', '2022-06-01', 'dermatologia', 2),
+('cntmrc99m01a001h', 'Marco', 'Conti', '2018-09-25', 'dermatologia', 2),
+('rmnlgi00r01l736u', 'Giulia', 'Romano', '2023-01-10', 'pediatria', 2);
+
+CREATE TABLE Infermiere (
+    cfimpiegato VARCHAR(16),
+    PRIMARY KEY (cfimpiegato),
+    FOREIGN KEY (cfimpiegato) REFERENCES Impiegato(codicefiscale)
+);
+
+INSERT INTO Infermiere (cfimpiegato)
+VALUES
+('dnlfba86c01h501q'),
+('brslcu89m01l736a'),
+('frnlgi90l01h501f'),
+('grglra92r01a001g');
+
+CREATE TABLE Medico (
+    cfimpiegato VARCHAR(16),
+    PRIMARY KEY (cfimpiegato),
+    FOREIGN KEY (cfimpiegato) REFERENCES Impiegato(codicefiscale)
+);
+
+INSERT INTO Medico (cfimpiegato)
+VALUES
+('sntgnn94r01l736c'),
+('lbrcml95a01c342b'),
+('fbbrfl96m01a001x'),
+('pllmra93e01b354n'),
+('gttlla97r01b354l'),
+('espstf98l01c342t'),
+('cntmrc99m01a001h'),
+('rmnlgi00r01l736u');
+
+CREATE TABLE PersonaleAmministrativo (
+    cfimpiegato VARCHAR(16),
+    PRIMARY KEY (cfimpiegato),
+    FOREIGN KEY (cfimpiegato) REFERENCES Impiegato(codicefiscale)
+);
+
+INSERT INTO PersonaleAmministrativo (cfimpiegato)
+VALUES
+('mncmra85m01h501z'),
+('bnclrd87a01f205x'),
+('vtlgpp88p01l736j');
+
+CREATE TABLE Primario (
+    cfimpiegato VARCHAR(16),
+    PRIMARY KEY (cfimpiegato),
+    FOREIGN KEY (cfimpiegato) REFERENCES Impiegato(codicefiscale)
+);
+
+INSERT INTO Primario (cfimpiegato)
+VALUES
+('fbbrfl96m01a001x'),
+('gttlla97r01b354l'),
+('espstf98l01c342t'),
+('cntmrc99m01a001h'),
+('rmnlgi00r01l736u');
+
+CREATE TABLE Viceprimario (
+    cfimpiegato VARCHAR(16),
+    PRIMARY KEY (cfimpiegato),
+    FOREIGN KEY (cfimpiegato) REFERENCES Impiegato(codicefiscale)
+);
+
+INSERT INTO Viceprimario (cfimpiegato)
+VALUES
+('pllmra93e01b354n'),
+('sntgnn94r01l736c'),
+('lbrcml95a01c342b');
+
+CREATE TABLE Specializzazione (
+    nomespecializzazione VARCHAR(50) PRIMARY KEY,
+    primario VARCHAR(16) NOT NULL,
+    FOREIGN KEY (primario) REFERENCES Primario(cfimpiegato)
+);
+
+INSERT INTO Specializzazione (nomespecializzazione, primario)
+VALUES
+('Cardiologia', 'fbbrfl96m01a001x'),
+('Chirurgia Generale', 'gttlla97r01b354l'),
+('Oncologia', 'espstf98l01c342t'),
+('Pediatria', 'cntmrc99m01a001h'),
+('Neurologia', 'rmnlgi00r01l736u');
+
+CREATE TABLE ProntoSoccorso (
+    nome VARCHAR(50) PRIMARY KEY,
+    codiceospedale INT NOT NULL
+);
+
+INSERT INTO ProntoSoccorso (nome, codiceospedale)
+VALUES
+('Pronto Soccorso Generale', 1),
+('Pronto Soccorso Pediatrico', 2);
+
+CREATE TABLE Sostituzione (
+    cfprimario VARCHAR(16) NOT NULL,
+    cfvice VARCHAR(16) NOT NULL,
+    datainizio DATE NOT NULL,
+    datafine DATE NOT NULL,
+    FOREIGN KEY (cfprimario) REFERENCES Primario(cfimpiegato),
+    FOREIGN KEY (cfvice) REFERENCES Viceprimario(cfimpiegato),
+    PRIMARY KEY (cfprimario, cfvice, datainizio)
+);
+
+INSERT INTO Sostituzione (cfprimario, cfvice, datainizio, datafine)
+VALUES
+('fbbrfl96m01a001x', 'pllmra93e01b354n', '2023-01-01', '2023-02-28'),
+('cntmrc99m01a001h', 'lbrcml95a01c342b', '2023-03-15', '2023-04-15');
+
+CREATE TABLE TurnoInfermiere (
+    orainizio TIME NOT NULL,
+    orafine TIME NOT NULL,
+    data DATE NOT NULL,
+    cfinfermiere VARCHAR(16) NOT NULL,
+    FOREIGN KEY (cfinfermiere) REFERENCES Infermiere(cfimpiegato),
+    PRIMARY KEY (data, orainizio, cfinfermiere)
+);
+
+INSERT INTO TurnoInfermiere (orainizio, orafine, data, cfinfermiere)
+VALUES
+('09:00:00', '15:00:00', '2024-07-17', 'dnlfba86c01h501q'),
+('08:00:00', '16:00:00', '2024-07-17', 'grglra92r01a001g');
+
+CREATE TABLE TurnoMedico (
+    orainizio TIME NOT NULL,
+    orafine TIME NOT NULL,
+    data DATE NOT NULL,
+    cfmedico VARCHAR(16) NOT NULL,
+    FOREIGN KEY (cfmedico) REFERENCES Medico(cfimpiegato),
+    PRIMARY KEY (data, orainizio, cfmedico)
+);
+
+INSERT INTO TurnoMedico (orainizio, orafine, data, cfmedico)
+VALUES
+('09:00:00', '17:00:00', '2024-07-17', 'gttlla97r01b354l'),
+('05:00:00', '10:00:00', '2024-07-17', 'cntmrc99m01a001h'),
+('11:00:00', '20:00:00', '2024-07-17', 'sntgnn94r01l736c');
+
+CREATE TABLE Patologia (
+    nome VARCHAR(100) NOT NULL,
+    PRIMARY KEY (nome)
+);
+
+INSERT INTO Patologia (nome)
+VALUES
+('Diabete'),
+('Ipertensione'),
+('Asma');
+
+CREATE TABLE Presenta (
+    nome VARCHAR(100) NOT NULL,
+    codicefiscale VARCHAR(16) NOT NULL,
+    datainizio DATE NOT NULL,
+    FOREIGN KEY (codicefiscale, datainizio) REFERENCES Ricovero(codicefiscale, datainizio),
+    PRIMARY KEY (nome, codicefiscale, datainizio)
+);
+
+INSERT INTO Presenta (nome, datainizio, codicefiscale)
+VALUES
+('Diabete', '2023-01-15', 'rssmra85m07f205w'),
+('Ipertensione', '2023-03-12', 'bnclra79p26f944x'),
+('Asma', '2023-05-10', 'vrtgpp90l22h442v');
+
+CREATE TABLE PrenotaEsterno (
+    codiceae INT,
+    codiceprenotazione INT,
+    FOREIGN KEY (codiceae) REFERENCES AmbulatorioEsterno(codiceae),
+    FOREIGN KEY (codiceprenotazione) REFERENCES PrenotazioneEsame(codice),
+    PRIMARY KEY (codiceae, codiceprenotazione)
+);
+
+INSERT INTO PrenotaEsterno (codiceae, codiceprenotazione)
+VALUES
+(1, 1),
+(2, 3),
+(3, 4);
+
+CREATE TABLE PrenotaInterno (
+    codiceai INT,
+    codiceprenotazione INT,
+    FOREIGN KEY (codiceai) REFERENCES AmbulatorioInterno(codiceai),
+    FOREIGN KEY (codiceprenotazione) REFERENCES PrenotazioneEsame(codice),
+    PRIMARY KEY (codiceai, codiceprenotazione)
+);
+
+INSERT INTO PrenotaInterno (codiceai, codiceprenotazione)
+VALUES
+(1, 2),
+(2, 5);
+
