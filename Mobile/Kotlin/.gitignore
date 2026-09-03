@@ -1,0 +1,1 @@
+.gradle/ echo .idea/ echo *.iml echo local.properties echo captures/ echo .cxx/ echo *.apk echo *.aab echo *.ap_ echo *.dex echo build/ 
