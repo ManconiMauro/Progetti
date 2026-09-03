@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scegli Una Carta Di Altri Utenti</title>
+
+        <!--Link per funzioni javascript e per il file css-->
+	    <link rel="stylesheet" href="Selezione.css">
+        <script src="Selezione.js"></script>
+
+        <!--Link di Bootstrap-->
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
+       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+              <label>Marvel Heroes</label>
+              <button class="btn btn-secondary" onclick="home()">Home</button>
+              <button class="btn btn-secondary" onclick="album()">Album</button>
+              <button class="btn btn-secondary" onclick="pacchetti()">Compra Pacchetti</button>
+              <button class="btn btn-secondary" onclick="crediti()">Compra Crediti</button>
+              <img src="immagini/avatar.jfif" onclick="mostraProfilo()" alt="Immagine Profilo" width="60" height="60">
+            </div>
+        </nav>
+
+        <center class="centro"><h1 style="background-color: black; color: white;" >Seleziona Una Delle Carte Doppie di Altri Utenti Che Vorresti</h1></center>
+        
+        <ul class="list-group" id="contenuto">
+            <!-- Qui verrà generato dinamicamente il contenuto della pagina -->
+            <div class="row" id="pg">
+                <div id="card-pg" class="col-3 d-none">
+                    <div class="card" style="width: 18rem;">
+                        <h3 class="card-name">Card title</h3>
+                        <img src="" class="card-img-top">
+                        <div class="card-body">
+                            <h6 class="proprietario"></h6>
+                            <button onclick="scambia(this.parentElement.parentElement.parentElement)" class="btn btn-primary">SCAMBIA</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+        <div class="hide">
+            <div id="profilo">
+            </div>
+        </div>
+        <script>stampaScambiPossibili()</script>
+    </body>
+</html>

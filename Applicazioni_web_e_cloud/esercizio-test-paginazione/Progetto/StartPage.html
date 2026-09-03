@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    
+    <!--Link per funzioni javascript e per il file css-->
+    <link rel="stylesheet" href="Start.css">
+    <script src="Start.js"></script>
+
+    <!--Link di bootstrap per far funzionare la navbar-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!--Navbar per sign up, log in e per il messaggio di crediti-->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <label>Marvel Heroes</label>
+            <button class="btn btn-secondary" onclick="faq()">Informazioni</button>
+            <button class="btn btn-secondary" onclick="sign()">Sign Up</button>
+            <button class="btn btn-secondary" onclick="Log()">Log In</button>
+        </div>
+    </nav>
+
+    <!--Messaggio nascosto che appare quando viene premuto il bottone Informazioni-->
+    <div id="Faq">
+        <p>Siamo un'azienda incredibilmente piccola,
+             costituita da una sola persona, ma animata da una profonda passione per i supereroi dei fumetti Marvel.<br>
+            Ci auguriamo sinceramente che apprezziate il divertimento di collezionare e scambiare le figurine dei nostri amati supereroi.<br>
+            È importante sottolineare che la nostra applicazione web, nonostante disponga di uno shop, opera senza l'uso di denaro reale per l'acquisto delle figurine;
+             Il nostro obiettivo principale non è il profitto, ma piuttosto condividere la gioia e la passione per questo mondo affascinante.<br><br>
+            Auguriamo a tutti voi un divertimento senza limiti e vi ringraziamo di cuore per la vostra attenzione.</p>
+        <button onclick="reverse()">Torna Indietro</button>
+    </div>
+
+    <!--form per accedere all'applicazione-->
+    <form id="loginForm">
+        <h1>Login</h1><br>
+        <label for="username">Nome utente:</label><br>
+        <input type="text" id="username" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" required><br>
+        <input type="button" class="bottone" value="Accedi" onclick="Login()">
+    </form>
+
+    <!--form per registrare l'account-->
+    <div class="container">
+        <form id="registration">
+        <h1 class="titolo">Registrazione</h1><br>
+
+        <label for="username1">Username:</label><br>
+        <input type="text" id="username1" name="username1" required><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="password1">Password:</label><br>
+        <input type="password" id="password1" name="password1" required><br>
+
+        <label for="confirmPassword">Confirm Password:</label><br>
+        <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+
+        <label for="superhero">Supereroe preferito:</label><br>
+        <input type="superhero" id="superhero" name="superhero" required><br>
+
+        <input type="button" class="bottone" value="Registrati" onclick="register()">
+    </form>
+    </div>
+    <script>onLoad();</script>
+</body>
+</html>

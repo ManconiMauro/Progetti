@@ -1,0 +1,43 @@
+body {
+    background-image: url('immagini/Sezione.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+    background-position: center center;
+}
+
+.container {
+    padding: 5px 5px 5px 5px;
+}
+
+.navbar {
+    text-align: center;
+    background-color: black;
+    padding: 10px;
+    color: white;
+}
+
+.navbar .btn {
+    overflow: hidden;
+    background-color: black;
+    color: white;
+}
+
+img {
+    border-radius: 30%;
+}
+
+#profilo {
+    background-color: black;
+    color: white;
+    text-align: center;
+    max-width: 400px;
+    margin: 100px auto; /* Auto per centrare orizzontalmente */
+    padding: 20px;
+    border-radius: 10px;
+    display: none; /* Nascondi inizialmente */
+}
+
+#profilo img {
+    border-radius: 30%;
+}

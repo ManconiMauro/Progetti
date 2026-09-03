@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!--Link per funzioni javascript e per il file css-->
+	<link rel="stylesheet" href="Pacchetti.css">
+    <script src="Pacchetti.js"></script>
+
+    <!--Link di Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="headerContainer">
+            <label>Marvel Heroes</label>
+            <button class="btn btn-secondary" onclick="home()">Home</button>
+            <button class="btn btn-secondary" onclick="album()">Album</button>
+            <button class="btn btn-secondary" onclick="scambio()">Scambio</button>
+            <button class="btn btn-secondary" onclick="crediti()">Compra Crediti</button>
+            <img src="immagini/avatar.jfif" onclick="mostraProfilo()" alt="Immagine Profilo" width="60" height="60">
+        </div>
+    </nav>
+    
+    <div class="container">
+        <br>
+        <p>Acquista Crediti:</p>
+        <ul>
+            <li>
+                <p>Pacchetto da 5</p>
+                <img src="immagini/1Pacchetto.jpg" id="b1" onclick="packs(this.id)" ><br><p>Costo: 1 Credito</p></li>
+            <li>
+                <p>Pacchetto da 10</p>
+                <img src="immagini/2Pacchetti.jpg" id="b2" onclick="packs(this.id)" ><br><p>Costo: 2 Crediti</p></li>
+            <li>
+                <p>Pacchetto da 25</p>
+                <img src="immagini/Bundle.jpg" id="b3" onclick="packs(this.id)" ><br><p>Costo: 4 Crediti</p></li>
+        </ul>
+    </div>
+
+    <div id="hidden">
+        <ul class="list-group" id="contenuto">
+            <!-- Qui verrà generato dinamicamente il contenuto della pagina -->
+            <div class="row" id="pg">
+                <div id="card-pg" class="col-3 d-none">
+                    <div class="card" style="width: 18rem;">
+                        <h3 class="card-name">Card title</h3>
+                        <img src="" class="card-img-top">
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+    <div class="hid">
+        <div id="profilo">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!--Link per funzioni javascript e per il file css-->
+	<link rel="stylesheet" href="CompraCrediti.css">
+    <script src="CompraCrediti.js"></script>
+
+    <!--Link di Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="headerContainer">
+          <label>Marvel Heroes</label>
+          <button class="btn btn-secondary" onclick="home()">Home</button>
+          <button class="btn btn-secondary" onclick="album()">Album</button>
+          <button class="btn btn-secondary" onclick="scambio()">Scambia Carte</button>
+          <button class="btn btn-secondary" onclick="pacchetti()">Compra Pacchetti</button>
+          <img src="immagini/avatar.jfif" onclick="mostraProfil()" alt="Immagine Profilo" width="60" height="60">
+        </div>
+    </nav>
+    
+    <div class="flex-container">
+        <br>
+        <p>Acquista Crediti:</p>
+        <ul>
+            <li><img src="immagini/Credito1.jpg" id="b1" onclick="acquista(this.id)" ><br><p>1 Credito</p></li>
+            <li><img src="immagini/Crediti2.jpg" id="b2" onclick="acquista(this.id)" ><br><p>2 Crediti</p></li>
+            <li><img src="immagini/Crediti3.jpg" id="b3" onclick="acquista(this.id)" ><br><p>4 Crediti</p></li>
+        </ul>
+    </div>
+
+    <div class="hid">
+        <div id="profilo">
+        </div>
+    </div>
+</body>
+</html>

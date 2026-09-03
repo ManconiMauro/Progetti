@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url(immagini/sfondoScambio.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+    background-position: center center;
+}
+
+.navbar {
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    padding: 10px;
+    color: white;
+}
+
+.navbar .btn {
+    margin-left: 10%;
+    overflow: hidden;
+    background-color: black;
+    color: white;
+}
+
+.navbar img{
+    margin-left: 10%;
+}
+
+.headerContainer {
+    width: inherit;
+    padding: 5px 5px 5px 5px;
+}
+
+img {
+    border-radius: 30%;
+}
+
+.flex-container{
+    text-align: center;
+    width: 40%;
+    height: 32%;
+    color: white;
+    background-color: black;
+    border-radius: 20px 20px 20px 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.flex-container ul {
+    margin-top: 5px;
+    list-style-type: none; /* Rimuove i punti elenco */
+    padding: 0; /* Rimuove il padding predefinito */
+}
+
+.flex-container ul li {
+    display: inline-block; /* Allinea gli elementi in linea */
+    margin: 20px; /* Spazio tra gli elementi li */
+    text-align: center; /* Centra il contenuto */
+}
+
+.flex-container ul li img {
+    width: 100px; /* Dimensione fissa per le immagini */
+    height: 100px; /* Altezza automatica per mantenere l'aspetto originale */
+}
+
+#profilo {
+    background-color: black;
+    color: white;
+    text-align: center;
+    max-width: 400px;
+    margin: 100px auto; /* Auto per centrare orizzontalmente */
+    padding: 20px;
+    border-radius: 10px;
+    display: none; /* Nascondi inizialmente */
+}
+
+#profilo img {
+    border-radius: 30%;
+}

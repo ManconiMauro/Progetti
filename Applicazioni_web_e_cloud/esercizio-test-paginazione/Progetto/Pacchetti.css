@@ -1,0 +1,100 @@
+body {
+    background-image: url(immagini/sfondoPacchetti.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+    background-position: center center;
+}
+
+.container{
+    content: inherit;
+    flex: 1;
+    font-family: "Arial", sans-serif;
+    text-align: center;
+    width: 70%;
+    height: 45%;
+    color: white;
+    background-color: black;
+    border-radius: 20px 20px 20px 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.container ul {
+    margin-top: 5px;
+    list-style-type: none; /* Rimuove i punti elenco */
+    padding: 0; /* Rimuove il padding predefinito */
+}
+
+.container ul li {
+    display: inline-block; /* Allinea gli elementi in linea */
+    margin: 20px; /* Spazio tra gli elementi li */
+    text-align: center; /* Centra il contenuto */
+}
+
+.container ul li img {
+    width: 150px; /* Dimensione fissa per le immagini */
+    height: 150px; /* Altezza automatica per mantenere l'aspetto originale */
+}
+
+#hidden{
+    border-radius: 20px 20px 20px 20px;
+    display: none;
+}
+
+.navbar {
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    padding: 10px;
+    color: white;
+}
+
+.navbar .btn {
+    margin-left: 10%;
+    overflow: hidden;
+    background-color: black;
+    color: white;
+}
+
+.navbar img{
+    margin-left: 10%;
+}
+
+.headerContainer {
+    width: inherit;
+    padding: 5px 5px 5px 5px;
+}
+
+img {
+    border-radius: 30%;
+}
+
+#profilo {
+    background-color: black;
+    color: white;
+    text-align: center;
+    max-width: 400px;
+    margin: 100px auto; /* Auto per centrare orizzontalmente */
+    padding: 20px;
+    border-radius: 10px;
+    display: none; /* Nascondi inizialmente */
+}
+
+#profilo img {
+    border-radius: 30%;
+}
+
+.card {
+    width: auto;
+    margin: 25px;
+    background-color: beige;
+    padding: 2px;
+}
+
+.card img{
+    width: auto;
+    height: 15vmax;
+}

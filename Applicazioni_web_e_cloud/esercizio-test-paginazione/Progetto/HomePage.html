@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+    <!--Link per funzioni javascript e per il file css-->
+	<link rel="stylesheet" href="Homecss.css">
+    <script src="Homejs.js"></script>
+
+     <!--Link di Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+    <!--Header, unico solo per la pagina home-->
+	<header>
+        <h2>Marvel heores</h2> 
+        <center><img src="immagini/marvel.png"></center>
+        <div class="user-profile">
+            <img src="immagini/avatar.jfif" onclick="mostraProfilo()" alt="Immagine Profilo" width="60" height="60">
+        </div>
+    </header>
+    
+	<div class="container">
+        <div class="section Album">
+            <!-- Contenuto della sezione Album -->
+			<button onclick="album()">Visualizza l'Album</button>
+        </div>
+
+        <div class="section Scambio">
+            <!-- Contenuto della sezione Scambio -->
+            <button onclick="scambio()">Scambia Carte</button>
+        </div>
+
+        <div class="section Pacchetti">
+            <!-- Contenuto della sezione Pacchetti -->
+            <button onclick="pacchetti()">Compra Pacchetti</button>
+        </div>
+
+        <div class="section Crediti">
+            <!-- Contenuto della sezione Crediti -->
+            <button onclick="crediti()">Compra Crediti</button>
+        </div>
+    </div>
+
+    <!--picola calsse nacosta ch3e stamperà le informazioni del profilo, l'ho usata in tutte le pagine-->
+    <div class="hidden">
+        <div id="profilo">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Form Dei Dati Da Modificare</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-image: url(immagini/marvel-supereroi.jpg); 
+                background-repeat: no-repeat;
+                background-size: cover;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            #registration {
+                align-items: center;
+                font-family: "Arial", sans-serif;
+                justify-content: center;
+                text-align: center;
+                padding: 10px;
+                width: 20%;
+                height: 45%;
+                color: white;
+                background-color: black;
+                border-radius: 20px 20px 20px 20px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            #registration .bottone{
+                background-color: gray;
+                color: white;
+            }
+        </style>
+
+        <script src="ModificaDati.js"></script>
+    </head>
+    <body>
+        <!--form per registrare l'account-->
+        <div class="container">
+            <form id="registration">
+            <h3 class="titolo">inserisci I Nuovi Dati</h3><br>
+
+            <label for="username1">Username:</label><br>
+            <input type="text" id="username1" name="username1" required><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="password1">Password:</label><br>
+            <input type="password" id="password1" name="password1" required><br>
+
+            <label for="confirmPassword">Confirm Password:</label><br>
+            <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+
+            <label for="superhero">Supereroe preferito:</label><br>
+            <input type="superhero" id="superhero" name="superhero" required><br>
+
+            <input type="button" class="bottone" value="Invio" onclick="avviaModifiche()">
+        </form>
+        </div>
+    </body>
+</html>

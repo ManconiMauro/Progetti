@@ -1,0 +1,113 @@
+body {
+    background-image: url('immagini/nonso.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+    background-position: center center;
+    filter: blur(5);
+}
+    
+.container {
+    padding: 5px 5px 5px 5px;
+}
+
+.navbar {
+    margin-top: 0;
+    text-align: center;
+    background-color: black;
+    padding: 10px;
+    color: white;
+}
+
+.navbar .btn {
+    overflow: hidden;
+    background-color: black;
+    color: white;
+}
+
+img {
+    border-radius: 30%;
+}
+
+#profilo {
+    background-color: black;
+    color: white;
+    text-align: center;
+    max-width: 400px;
+    margin: 100px auto; /* Auto per centrare orizzontalmente */
+    padding: 20px;
+    border-radius: 10px;
+    display: none; /* Nascondi inizialmente */
+}
+
+#profilo img {
+    border-radius: 30%;
+}
+
+.scambi {
+    display: flex;
+    flex-direction: column; /* Cambia la direzione dei componenti per impilare gli elementi verticalmente */
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    text-align: center; /* Allinea il testo al centro */
+    background-color: black;
+    color: white;
+}
+
+.messaggio {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px; /* Aggiunge spazio tra il messaggio e le immagini */
+}
+
+.immagini {
+    background-color: gray;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.immagini img {
+    max-width: 100%;
+    height: auto;
+}
+
+.bottoni {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.bottoni button {
+  margin: 5px;
+  background-color: grey; 
+  color: black; 
+  border: none; 
+  padding: 10px 20px; 
+  transition: background-color 0.3s ease; /* Aggiunge una transizione al cambiamento del colore di sfondo */
+}
+
+.scambio-card{
+    color:black
+}
+
+.scambio-card h5{
+    color:black
+}
+
+#scambi{
+    background-color: black;
+    color: white;
+}
+
+.centro{
+    background-color: black;
+    color: white;
+}

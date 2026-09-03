@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(immagini/marvel-supereroi.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#loginForm {
+    font-family: "Arial", sans-serif;
+    text-align: center;
+    width: 20%;
+    height: 35%;
+    padding: 10px;
+    color: white;
+    background-color: black;
+    border-radius: 20px 20px 20px 20px;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loginForm .bottone{
+    background-color: gray;
+    color: white;
+}
+
+#registration {
+    align-items: center;
+    font-family: "Arial", sans-serif;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    width: 25%;
+    height: 60%;
+    color: white;
+    background-color: black;
+    border-radius: 20px 20px 20px 20px;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#registration .bottone{
+    background-color: gray;
+    color: white;
+}
+
+h1 {
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+#Faq {
+    align-items: center;
+    font-family: "Arial", sans-serif;
+    text-align: center;
+    padding: 15px;
+    width: 30%;
+    height: 60%;
+    color: white;
+    background-color: black;
+    border-radius: 20px 20px 20px 20px;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#Faq button{
+    background-color: gray;
+    color: white;
+}
+
+.container {
+    padding: 5px 5px 5px 5px;
+
+}
+
+.navbar {
+    text-align: center;
+    background-color: black;
+    padding: 10px;
+    color: white;
+}
+
+.navbar .btn {
+    overflow: hidden;
+    background-color: black;
+    color: white;
+}

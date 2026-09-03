@@ -1,0 +1,11 @@
+--2022-11-25 09:36:41--  https://api.themoviedb.org/3/movie/popular?api_key=2461e2dc84a8e379ad6a8309c585a25d
+Resolving api.themoviedb.org (api.themoviedb.org)... 108.156.2.77, 108.156.2.119, 108.156.2.120, ...
+Connecting to api.themoviedb.org (api.themoviedb.org)|108.156.2.77|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 12582 (12K) [application/json]
+Saving to: ‘popular?api_key=2461e2dc84a8e379ad6a8309c585a25d’
+
+popular?api_key=2461e2dc84a8e379ad6a8309c585a25d    0%[                                                                                                              ]       0  --.-KB/s               popular?api_key=2461e2dc84a8e379ad6a8309c585a25d  100%[=============================================================================================================>]  12,29K  --.-KB/s    in 0s      
+
+2022-11-25 09:36:41 (231 MB/s) - ‘popular?api_key=2461e2dc84a8e379ad6a8309c585a25d’ saved [12582/12582]
+
