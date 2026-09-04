@@ -1,0 +1,18 @@
+package main
+
+import . "fmt"
+import "math"
+
+func main() {
+
+	var raggio, circonferenza, area float64
+	
+	Println("Dammi il raggio:")
+	Scan(&raggio)
+    
+	circonferenza=2*raggio*math.Pi
+	area=raggio*raggio*math.Pi
+
+	Println(" Il raggio è:",raggio,"\n La circonferenza è:",circonferenza,"\n L'area è:",area)
+
+}

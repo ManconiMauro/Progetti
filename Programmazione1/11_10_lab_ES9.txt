@@ -1,0 +1,34 @@
+package main
+
+import . "fmt"
+import "math"
+
+func main() {
+
+	var età1, età2 int
+	
+	Println("Dammi età:")
+	Scan(&età1)
+	
+	
+	Println("Dammene un'altra:")
+	Scan(&età2)
+    
+    var somma, somma2 int
+    var  media, media2, mediaD, mediaE float64
+
+    somma=età1+età2;
+    Println("La somma delle 2 età è:",somma)
+    media=float64(somma)/2
+    Println("La media aritmetica delle 2 età è:",media)
+    mediaD = math.Floor(media)
+    Println("La media per difetto delle 2 età è:",mediaD)
+    mediaE= math.Ceil(media)
+    Println("La media per eccesso delle 2 età è:",mediaE)
+    
+    somma2=(età1+10)+(età2+10)
+    Println("La somma delle 2 età tra 10 anni è:",somma2)
+    media2=float64(somma2)/2
+    Println("La media aritmetica delle 2 età tra 10 anni è:",media2)
+    
+}

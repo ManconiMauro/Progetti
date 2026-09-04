@@ -1,0 +1,34 @@
+package main
+
+import . "fmt"
+
+func main() {
+    println("Esempi di varibili e conti con esse\n")
+    var variabile int = 1
+    var variabile2 = 2
+    var variabile3 int 
+    variabile3=variabile3+1
+    variabile3+=1
+    variabile3++
+    var variabile4, variabile5 int = 4, 5
+    variabile6 := variabile2*variabile3;
+    Print(variabile, variabile2, variabile3, variabile4, variabile5, variabile6, "\n")
+    println("Scambio di valore e modifica\n")
+    variabile=12
+    temp:=variabile
+    variabile=variabile2
+    variabile2=temp
+    variabile, variabile2 = variabile2, variabile
+    println("", variabile, variabile2)
+    println("Altri tipi di variabili \n")
+    var s string
+    s="ciao"
+    println("Il valore della variabile è:", s)
+    var a, b int = 2, 3
+    var f float64 = float64(a)*float64(b)*1.2
+    println(f)
+    var c int  
+    Print("Varibili da tastiera:")
+    Scan(&c)
+    Println("\n", c)
+}

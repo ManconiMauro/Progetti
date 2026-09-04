@@ -1,0 +1,16 @@
+package main
+
+import . "fmt"
+
+func main() {
+
+	var Km, miglia float64
+	
+	Println("Dammi il numero di Km:")
+	Scan(&Km)
+    
+    miglia=Km*0.62137
+
+	Println(Km,"in miglia sono:",miglia)
+
+}

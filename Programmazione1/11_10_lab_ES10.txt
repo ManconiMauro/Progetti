@@ -1,0 +1,18 @@
+package main
+
+import . "fmt"
+import "math"
+
+func main() {
+    
+    var n, l float64
+    
+    println("Dammi il numero di lati del poligono:")
+    Scan(&n)
+    
+    println("Dammi la lunghezza dei lati del poligono:")
+    Scan(&l)
+    
+    var area float64 = (n * math.Pow(l, 2)) / (4 * math.Tan(math.Pi/n))
+    println("L'area risulta di:",area)
+}
