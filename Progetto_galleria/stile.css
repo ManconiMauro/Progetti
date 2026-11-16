@@ -1,0 +1,487 @@
+:root {
+    --parete: #e8eae6;
+    --inchiostro: #1f2623;
+    --tenue: #5d6862;
+    --passepartout: #fbfbf9;
+    --linea: #cfd3cd;
+    --accento: #7a2e3a;
+}
+ 
+* { box-sizing: border-box; }
+ 
+body {
+    margin: 0;
+    font-family: 'Jost', 'Segoe UI', Arial, sans-serif;
+    background: var(--parete);
+    color: var(--inchiostro);
+    line-height: 1.5;
+}
+ 
+a { color: inherit; }
+ 
+:focus-visible {
+    outline: 3px solid var(--accento);
+    outline-offset: 3px;
+}
+ 
+/* Intestazione */
+.testata {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 1rem;
+}
+.testata h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+}
+.testata nav a { color: var(--tenue); }
+.testata nav a:hover { color: var(--accento); }
+ 
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem 4rem;
+}
+ 
+/* Griglia delle opere */
+.griglia {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2.5rem 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+ 
+.opera .cornice {
+    display: block;
+    padding: 1rem;
+    background: var(--passepartout);
+    border: 1px solid var(--linea);
+}
+/* Il formato 4:5 lo ha l'immagine stessa: così tutte hanno la stessa misura */
+.opera .cornice img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+.opera .segnaposto {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+}
+.segnaposto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--parete);
+    color: var(--tenue);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 1rem;
+}
+ 
+.opera .didascalia {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0.9rem 0 0.7rem;
+}
+.opera h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+.prezzo {
+    font-size: 1.15rem;
+    font-weight: 300;
+    white-space: nowrap;
+}
+ 
+/* Pulsante */
+.pulsante {
+    display: inline-block;
+    padding: 0.55rem 1.2rem;
+    background: var(--inchiostro);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+.pulsante:hover { background: var(--accento); }
+ 
+/* Pagina di dettaglio */
+.dettaglio {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+}
+.dettaglio .cornice {
+    padding: 1.5rem;
+    background: var(--passepartout);
+    border: 1px solid var(--linea);
+}
+.dettaglio .cornice img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+.dettaglio .segnaposto {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+}
+.dettaglio h2 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 300;
+}
+.dati { margin: 0 0 2rem; }
+.dati div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--linea);
+}
+.dati dt { color: var(--tenue); }
+.dati dd { margin: 0; text-align: right; }
+ 
+.messaggio { color: var(--tenue); }
+ 
+@media (max-width: 700px) {
+    .dettaglio { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+ 
+/* Barra superiore: menu a sinistra, carrello a destra */
+.barra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--linea);
+}
+ 
+.icona {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+ 
+.menu { position: relative; }
+ 
+.menu summary,
+.carrello {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 0 0.9rem;
+    background: var(--passepartout);
+    border: 1px solid var(--linea);
+    color: var(--inchiostro);
+    text-decoration: none;
+    cursor: pointer;
+    list-style: none;
+}
+.menu summary::-webkit-details-marker { display: none; }
+.menu summary:hover,
+.carrello:hover { border-color: var(--accento); color: var(--accento); }
+ 
+.menu-voci {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    z-index: 10;
+    min-width: 220px;
+    margin: 0;
+    padding: 0.4rem;
+    list-style: none;
+    background: var(--passepartout);
+    border: 1px solid var(--linea);
+}
+.menu-voci a {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.7rem 0.8rem;
+    text-decoration: none;
+}
+.menu-voci a:hover { background: var(--parete); color: var(--accento); }
+ 
+.carrello { position: relative; padding: 0 0.7rem; }
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 1.3rem;
+    padding: 0 0.3rem;
+    border-radius: 999px;
+    background: var(--accento);
+    color: #fff;
+    font-size: 0.75rem;
+    line-height: 1.3rem;
+    text-align: center;
+}
+ 
+.azioni { display: flex; gap: 0.6rem; }
+ 
+/* Schermata di accesso */
+.accesso {
+    max-width: 420px;
+    margin: 8vh auto 0;
+    padding: 2.5rem 2rem;
+    background: var(--passepartout);
+    border: 1px solid var(--linea);
+}
+.accesso h1 {
+    margin: 0 0 0.3rem;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+}
+.modulo { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 1.5rem; }
+.modulo label { margin-top: 0.8rem; color: var(--tenue); font-size: 0.95rem; }
+.modulo input {
+    padding: 0.7rem 0.8rem;
+    font: inherit;
+    color: var(--inchiostro);
+    background: #fff;
+    border: 1px solid var(--linea);
+}
+.modulo input:focus-visible { border-color: var(--accento); }
+button.pulsante {
+    margin-top: 1.5rem;
+    width: 100%;
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+}
+ 
+/* Carrello */
+.avviso {
+    margin: 0 0 1.5rem;
+    padding: 0.8rem 1rem;
+    background: var(--passepartout);
+    border: 1px solid var(--linea);
+}
+.avviso.ok { border-color: #1a7f37; }
+.avviso.errore { border-color: #b3261e; color: #b3261e; }
+ 
+.elenco-carrello { margin: 0; padding: 0; list-style: none; }
+.riga-carrello {
+    display: grid;
+    --larghezza-miniatura: 80px; /* cambia qui la grandezza delle miniature */
+    grid-template-columns: var(--larghezza-miniatura) 1fr auto auto;
+    gap: 1rem 1.5rem;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--linea);
+}
+.riga-carrello h2 { margin: 0; font-size: 1.1rem; font-weight: 500; }
+.riga-carrello h2 a { text-decoration: none; }
+.riga-carrello h2 a:hover { color: var(--accento); }
+.miniatura {
+    box-sizing: border-box;
+    width: var(--larghezza-miniatura, 80px);
+    min-width: 0;
+    padding: 0.3rem;
+    overflow: hidden;
+    background: var(--passepartout);
+    border: 1px solid var(--linea);
+}
+.miniatura img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+.miniatura .segnaposto {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    padding: 0;
+    font-size: 0;
+}
+.non-disponibile { color: #b3261e; font-size: 0.9rem; }
+ 
+.riga-carrello button.pulsante,
+.totale button.pulsante { width: auto; margin-top: 0; }
+.pulsante-rosso { background: #b3261e; }
+.pulsante-rosso:hover { background: #8c1d18; }
+button.pulsante:disabled { background: var(--tenue); cursor: not-allowed; }
+ 
+.totale {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+.totale p { margin: 0; font-size: 1.2rem; }
+ 
+@media (max-width: 600px) {
+    .riga-carrello { grid-template-columns: var(--larghezza-miniatura) 1fr; }
+    .riga-carrello .prezzo,
+    .riga-carrello form { grid-column: 2; }
+}
+ 
+/* Moduli: nuova opera e modifica opera */
+.pagina-modulo { max-width: 680px; }
+.pagina-modulo .modulo { margin-top: 0; }
+.modulo select,
+.modulo input[type="file"] {
+    padding: 0.7rem 0.8rem;
+    font: inherit;
+    color: var(--inchiostro);
+    background: #fff;
+    border: 1px solid var(--linea);
+}
+.modulo input:disabled { background: var(--parete); color: var(--tenue); }
+.modulo select:focus-visible { border-color: var(--accento); }
+.modulo fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 1.2rem 0 0;
+    padding: 0.5rem 1.2rem 1.2rem;
+    border: 1px solid var(--linea);
+}
+.modulo legend { padding: 0 0.4rem; color: var(--tenue); }
+.nota {
+    margin: 1.2rem 0 0;
+    padding: 1rem 1.2rem;
+    background: var(--passepartout);
+    border-left: 4px solid var(--accento);
+}
+.avviso ul { margin: 0; padding-left: 1.2rem; }
+ 
+.selettore {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+.selettore .campo { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 220px; }
+.selettore label { color: var(--tenue); font-size: 0.95rem; }
+.selettore select {
+    padding: 0.7rem 0.8rem;
+    font: inherit;
+    color: var(--inchiostro);
+    background: #fff;
+    border: 1px solid var(--linea);
+}
+.selettore button.pulsante { width: auto; margin-top: 0; }
+ 
+/* Nuovo autore nel form "Nuova opera" */
+[hidden] { display: none !important; }
+.nuovo-autore { display: flex; flex-direction: column; gap: 0.4rem; }
+.esito-autore { margin: 0; min-height: 1.2rem; color: #1a7f37; font-size: 0.95rem; }
+ 
+/* Ricerca e filtro per autore (index) */
+.ricerca {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1rem;
+    margin: 0 0 2rem;
+}
+.campo-ricerca { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 220px; }
+.campo-ricerca label { color: var(--tenue); font-size: 0.95rem; }
+.campo-ricerca select,
+.casella-ricerca input {
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    font: inherit;
+    color: var(--inchiostro);
+    background: #fff;
+    border: 1px solid var(--linea);
+}
+.casella-ricerca { position: relative; }
+.casella-ricerca .icona {
+    position: absolute;
+    top: 50%;
+    left: 0.8rem;
+    width: 18px;
+    height: 18px;
+    transform: translateY(-50%);
+    color: var(--tenue);
+    pointer-events: none;
+}
+.casella-ricerca input { padding-left: 2.5rem; }
+.ricerca button.pulsante { width: auto; margin-top: 0; border: 0; font: inherit; cursor: pointer; }
+.azzera { color: var(--tenue); align-self: center; }
+.azzera:hover { color: var(--accento); }
+ 
+/* Liste divise per autore */
+.gruppo-autore { margin-top: 2.5rem; }
+.gruppo-autore h2 {
+    margin: 0 0 1.5rem;
+    padding-bottom: 0.6rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    border-bottom: 1px solid var(--linea);
+}
+ 
+/* Opera non ancora valutata */
+.prezzo.in-valutazione {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--tenue);
+}
+ 
+/* Opere vendute: sfondo grigio nell'elenco e nei dettagli */
+.opera.venduta {
+    background: #d0d3ce;
+    /* il riquadro grigio si estende oltre la scheda senza spostare la griglia */
+    box-shadow: 0 0 0 0.75rem #d0d3ce;
+}
+.opera.venduta .cornice { background: #e4e6e2; }
+.opera.venduta .prezzo { color: var(--inchiostro); }
+.testo-venduta {
+    margin: 0 0 0.7rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+ 
+.dettaglio.venduta {
+    padding: 2rem;
+    background: #d0d3ce;
+}
+.dettaglio.venduta .cornice { background: #e4e6e2; }
+.dettaglio.venduta .dati div { border-bottom-color: #aeb3ac; }
+.dettaglio.venduta .dati dt { color: #38413d; }
+ 
+/* Pulsanti nella pagina dei dettagli */
+.azioni-dettaglio { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
+.azioni-dettaglio form { margin: 0; }
+.azioni-dettaglio button.pulsante { width: auto; margin-top: 0; border: 0; font: inherit; cursor: pointer; }
+.pulsante-secondario {
+    background: transparent;
+    color: var(--inchiostro);
+    border: 1px solid var(--inchiostro);
+}
+.pulsante-secondario:hover { background: transparent; color: var(--accento); border-color: var(--accento); }
+.nota-dettaglio { margin: 0 0 1.2rem; color: var(--tenue); font-style: italic; }
+ 

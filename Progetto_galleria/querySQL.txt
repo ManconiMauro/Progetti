@@ -1,0 +1,78 @@
+
+create table Autore(
+codiceFiscale varchar(16) PRIMARY KEY,
+nome varchar(20),
+cognome varchar(20)
+);
+
+
+create table Opera(
+id integer PRIMARY KEY,
+titolo varchar(30),
+AnnoComposizione DATE,
+prezzo double,
+stato bool,
+autore varchar(16) NOT NULL,
+FOREIGN KEY (autore) REFENCES Autore (codiceFiscale)
+);
+
+create table Utente(
+id integer PRIMARY KEY,
+nome varchar(20),
+cognome varchar(20),
+nomeUtente varchar(50),
+password varchar(50),
+numeroCartaDiCredito varchar(20),
+codiceCarta varchar(3)
+);
+
+create table Ordine(
+id integer PRIMARY KEY,
+dataAcquisto DATE,
+statoOrdine varchar(10),
+idOpera integer NOT NULL,
+idUtente integer NOT NULL,
+FOREIGN KEY (idOpera) REFERENCES Opera (id),
+FOREIGN KEY (idUtente) REFERENCES Utente(id)
+);
+
+INSERT INTO Opera (id, titolo, annoComposizione, prezzo, stato, autore)
+VALUES (1, 'fiori', DATE '2024-06-15', 50,34, false, 'prsgnn87r03m377q');
+
+INSERT INTO Opera (id, titolo, annoComposizione, prezzo, stato, autore)
+VALUES (2, 'Fioritura', DATE '2022-03-11', 30,22, false, 'gstvlp99t11h187d');
+
+INSERT INTO Opera (id, titolo, annoComposizione, prezzo, stato, autore)
+VALUES (3, 'Ginepri', DATE '2026-11-23', 98,76, true, 'prsgnn87r03m377q');
+
+INSERT INTO Autore (codiceFiscale, nome, cognome)
+VALUES ('prsgnn87r03m377q', 'Priscilla', 'Gennari');
+
+INSERT INTO Autore (codiceFiscale, nome, cognome)
+VALUES ('gstvlp99t11h187d', 'Augusto', 'Volpi');
+
+INSERT INTO Utente (id, nome, cognome, nomeUtente, password, numeroCartaDiCredito, codiceCarta)
+VALUES (1, 'Maurizio', 'Franchi', maurizio, franchi2, 4567847563412650, 888);
+
+INSERT INTO Utente (id, nome, cognome, nomeUtente, password, numeroCartaDiCredito, codiceCarta)
+VALUES (2, 'Franco', 'Verdi', franco, green!, 3452647529139047, 202);
+
+INSERT INTO Utente (id, nome, cognome, nomeUtente, password, numeroCartaDiCredito, codiceCarta)
+VALUES (3, null, null, admin, psw, 0, 0);
+
+INSERT INTO Ordine (id, dataAcquisto, statoOrdine, idOpera, idUtente)
+VALUES (1, DATE '2025-02-24', 'Pagato', 3, 1);  
+
+INSERT INTO Ordine (id, dataAcquisto, statoOrdine, idOpera, idUtente)
+VALUES (2, DATE '2026-11-02', 'in Attesa', 1, 2);
+
+SELECT COUNT(id)
+FROM Opera
+Where autore=codiceFiscale;
+
+SELECT SUM(prezzo)
+FROM Ordine LEFT JOIN Opera ON Ordine.idOpera = Opera.id
+WHERE idUtente=
+
+SELECT AVG(prezzo)
+FROM Opera;
